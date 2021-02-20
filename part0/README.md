@@ -1,1 +1,10 @@
-Solutions of part 0 exercises to this folder
+# Part 0
+
+## Exercise 0.4 Note POST Sequence Diagram
+![0.4 Note POST Sequence Diagram](0.4-note-sequence-diagram.png)
+
+## Exercise 0.5 SPA GET Sequence Diagram
+![0.5 SPA GET Sequence Diagram](0.5-spa-sequence-diagram.png)
+
+## Exercise 0.6 SPA Note POST Sequence Diagram
+![0.6 SPA Note POST Sequence Diagram](0.6-spa-note-sequence-diagram.png)
