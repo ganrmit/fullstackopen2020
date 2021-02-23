@@ -3,12 +3,16 @@ import Filter from './components/Filter'
 import PersonForm from './components/PersonForm'
 import Persons from './components/Persons'
 import personsService from './services/persons'
+import Notification from './components/Notification'
+import Error from './components/Error'
 
 const App = () => {
   const [ persons, setPersons ] = useState([])
   const [ newName, setNewName ] = useState('')
   const [ newNumber, setNewNumber ] = useState('')
   const [ search, setSearch ] = useState('')
+  const [ notification, setNotification ] = useState(null)
+  const [ error, setError ] = useState(null)
 
   useEffect(() => {
     personsService
@@ -36,6 +40,15 @@ const App = () => {
             ))
             setNewName('')
             setNewNumber('')
+            setNotification(`${newName}'s number updated`)
+            setTimeout(() => setNotification(null), 5000)
+          })
+          .catch(e => {
+            setError('User nonexistant on the server.')
+            setTimeout(() => setError(null), 5000)
+            personsService
+              .getAll()
+              .then(initialPersons => setPersons(initialPersons))
           })
       }
     } else { // else create new
@@ -45,6 +58,8 @@ const App = () => {
           setPersons(persons.concat(returnedPerson))
           setNewName('')
           setNewNumber('')
+          setNotification(`Added ${newName}`)
+          setTimeout(() => setNotification(null), 5000)
         })
     }
   }
@@ -65,11 +80,21 @@ const App = () => {
       .then(result => {
         setPersons(persons.filter(p => p.id !== id))
       })
+      .catch(e => {
+        setError('User already removed from the server.')
+        setTimeout(() => setError(null), 5000)
+        personsService
+          .getAll()
+          .then(initialPersons => setPersons(initialPersons))
+      })
   }
 
   return (
     <div>
       <h2>Phonebook</h2>
+
+      <Notification message={notification} />
+      <Error message={error} />
 
       <Filter search={search} handleSearchChange={handleSearchChange} />
 
