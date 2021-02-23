@@ -1,4 +1,4 @@
-# Part 0
+# Sequence Diagrams for Exercises 0.4-0.6
 
 ## Exercise 0.4 Note POST Sequence Diagram
 ![0.4 Note POST Sequence Diagram](0.4-note-sequence-diagram.png)
