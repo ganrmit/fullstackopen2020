@@ -1,9 +1,18 @@
+import { useState } from 'react'
+import axios from 'axios'
+
 const Country = ({ country, requestWeather }) => {
   const { name, capital, population, languages, flag } = country
+  const weather_key = process.env.REACT_APP_API_KEY
+  const [weather, setWeather] = useState()
 
-  if(!country.weather) {
-    requestWeather(country)
-  }
+  // there's huge problems with this, it spams the API on top of weatherstack giving out HTTPS errors intermittently on the HTTP url.
+  axios
+    .get(`http://api.weatherstack.com/current?access_key=${weather_key}&query=${capital}`)
+    .then(response => {
+      console.log(response.data)
+      setWeather(response.data)
+    })
 
   return <div>
     <h2>{name}</h2>
@@ -18,6 +27,10 @@ const Country = ({ country, requestWeather }) => {
     </ul>
 
     <img src={flag} alt={`${name} flag`} width="200" />
+
+    if(!weather) {
+      <p>retrieved</p>
+    }
   </div>
 }
 
