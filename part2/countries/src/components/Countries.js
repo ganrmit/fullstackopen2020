@@ -1,6 +1,9 @@
-
-const Country = ({ country }) => {
+const Country = ({ country, requestWeather }) => {
   const { name, capital, population, languages, flag } = country
+
+  if(!country.weather) {
+    requestWeather(country)
+  }
 
   return <div>
     <h2>{name}</h2>
@@ -18,14 +21,14 @@ const Country = ({ country }) => {
   </div>
 }
 
-const Countries = ({ countries, setFocus }) => {
+const Countries = ({ countries, setFocus, requestWeather }) => {
   // Guards for times we don't list the countries
   if(countries.length > 10) { // Too many matches
     return <div>Too many matches, specify another filter</div>
   } else if (countries.length === 0) { // No matches
     return <div>No matches, specify another filter</div>
   } else if (countries.length === 1) { // A single matching country
-    return <Country country={countries[0]} />
+    return <Country country={countries[0]} requestWeather={requestWeather} />
   }
 
   // List the matching countries
