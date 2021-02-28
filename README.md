@@ -1,5 +1,7 @@
 # Full Stack Open 2020
 
+- **[Part 3 Phonebook](https://salty-forest-19169.herokuapp.com/) on Heroku**
+
 My solutions to the [Full Stack Open](https://fullstackopen.com/en/) course at the University of Helsinki. Accompanied by notes for things I found surprising or useful to remember.
 
 ## 1. Introduction to React
@@ -79,3 +81,35 @@ useEffect(() => {
 const footerStyle = { color: 'green', fontStyle: 'italic', fontSize: 16 }
 <div style={footerStyle}>...
 ```
+
+## 3. Programming a server with NodeJS and Express
+- `const http = require('http')` Node uses CommonJS modules not ES6 modules.
+- `npm install express` install express
+- Express example route with params
+```javascript
+app.get('/api/notes/:id', (request, response) => {
+  const id = Number(request.params.id)
+  const note = notes.find(note => note.id === id)
+  if (note) {
+    response.json(note)
+  } else {
+    response.status(404).end()
+  }
+})
+```
+- `response.json(notes)` Express JSON response
+- `npm install --save-dev nodemon` nodemon used for automatic restarts on source changes.
+- `HTTP 204` response used for successfull resource deletion
+- `app.use(express.json())` include Express JSON parser
+- `app.use(cors())` cors is required for the browser security model to work when the frontend is at a different address to the backend.
+- `const PORT = process.env.PORT || 3001` heroku gives it's port as an environment variable
+- `app.use(express.static('build'))` static files on express
+- `"build:ui": "rm -rf build && cd ../../osa2/materiaali/notes-new && npm run build --prod && cp -r build ../../../osa3/notes-backend/"` package.json build script
+- `"deploy:full": "npm run build:ui && git add . && git commit -m uibuild && npm run deploy"` heroku deploy script
+- `require('dotenv').config()` makes environment variables from `.env` available, eg. `process.env.MONGODB_URI`
+- `const errorHandler = (error, request, response, next) => ...` Express error handlers are middleware that are defined with a function that accepts four parameters. They are invoked when `next` is called with a parameter eg. `next(error)`
+- `heroku config:set MONGODB_URI=mongodb+srv://fullstack:secretpasswordhere@cluster0-ostce.mongodb.net/note-app?retryWrites=true` setting heroku environment variables
+- `npm install mongoose-unique-validator` required for unique validations with mongoose
+- `npm install eslint --save-dev` eslint for linting
+- `node_modules/.bin/eslint --init` initialize lint config
+- `.eslintignore` used like .gitignore for eslint
