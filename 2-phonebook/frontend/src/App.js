@@ -43,8 +43,8 @@ const App = () => {
             setNotification(`${newName}'s number updated`)
             setTimeout(() => setNotification(null), 5000)
           })
-          .catch(e => {
-            setError('User nonexistant on the server.')
+          .catch(error => {
+            setError(error.response.data.error.toString())
             setTimeout(() => setError(null), 5000)
             personsService
               .getAll()
@@ -60,6 +60,10 @@ const App = () => {
           setNewNumber('')
           setNotification(`Added ${newName}`)
           setTimeout(() => setNotification(null), 5000)
+        })
+        .catch(error => {
+          setError(error.response.data.error.toString())
+          setTimeout(() => setError(null), 5000)
         })
     }
   }
@@ -80,8 +84,8 @@ const App = () => {
       .then(result => {
         setPersons(persons.filter(p => p.id !== id))
       })
-      .catch(e => {
-        setError('User already removed from the server.')
+      .catch(error => {
+        setError(error.response.data.error.toString())
         setTimeout(() => setError(null), 5000)
         personsService
           .getAll()
