@@ -113,3 +113,38 @@ app.get('/api/notes/:id', (request, response) => {
 - `npm install eslint --save-dev` eslint for linting
 - `node_modules/.bin/eslint --init` initialize lint config
 - `.eslintignore` used like .gitignore for eslint
+
+## 4. Testing Express servers, user administration
+- Project structure
+```
+├── index.js
+├── app.js
+├── build
+│   └── ...
+├── controllers
+│   └── notes.js
+├── models
+│   └── note.js
+├── package-lock.json
+├── package.json
+├── utils
+│   ├── config.js
+│   ├── logger.js
+│   └── middleware.js
+```
+- `npm install --save-dev jest` Jest used for testing
+- `npm install express-async-errors` If an exception occurs in a async route, the execution is automatically passed to the error handling middleware without the need for a try/catch.
+- `await Promise.all(promiseArray)` await an array of promises.
+- `for...of` will handle promises serially
+```javascript
+for (let note of helper.initialNotes) {
+  let noteObject = new Note(note)
+  await noteObject.save()
+}
+```
+- `User.find({}).populate('notes')` you can populate references in mongoose.
+- `User.find({}).populate('notes', { content: 1, date: 1 })` mongoose population allows you to specify what to populate. This is like a weak GraphQL
+- `npm install jsonwebtoken` library for generating web tokens.
+- `bcrypt.compare(body.password, user.passwordHash)` bcrypt.compare for password/hash comparisons.
+- `jwt.sign(userForToken, process.env.SECRET)` signing a web token.
+- `Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5c2VybmFtZSI6Im1sdXVra2FpIiwiaW` auth header of this form for JWTs.
