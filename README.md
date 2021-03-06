@@ -2,7 +2,7 @@
 
 - **[Part 3 Phonebook](https://salty-forest-19169.herokuapp.com/) on Heroku**
 
-My solutions to the [Full Stack Open](https://fullstackopen.com/en/) course at the University of Helsinki. Accompanied by notes for things I found surprising or useful to remember.
+My solutions to the [Full Stack Open](https://fullstackopen.com/en/) course at the University of Helsinki. Accompanied by notes for things I found surprising or useful to remember. This is not always the cleanest code and was made for my own learning.
 
 ## 1. Introduction to React
 - [NVM](https://github.com/nvm-sh/nvm) Node version Manager, useful for getting specific versions of node and npm.
@@ -148,3 +148,30 @@ for (let note of helper.initialNotes) {
 - `bcrypt.compare(body.password, user.passwordHash)` bcrypt.compare for password/hash comparisons.
 - `jwt.sign(userForToken, process.env.SECRET)` signing a web token.
 - `Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5c2VybmFtZSI6Im1sdXVra2FpIiwiaW` auth header of this form for JWTs.
+
+## 5. Testing React apps
+- `{user === null && loginForm()}` conditional rendering trick for react
+- `{user === null ? loginForm() : noteForm() }` a more explicit, more terse conditional rendering trick.
+- `window.localStorage.setItem('name', 'juha tauriainen')` local storage setting
+- `window.localStorage.getItem('name')` local storage getting
+- `window.localStorage.setItem('loggedNoteappUser', JSON.stringify(user))` local storage stores DOMstrings so objects must be stringified.
+- `props.children` allows access and control of child elements
+```jsx
+<Togglable buttonLabel="reveal">
+  <p>this line is at start hidden</p>
+  <p>also this is hidden</p>
+</Togglable>
+// Can be used for conditional display and control
+<div style={showWhenVisible}>
+  {props.children}
+  <button onClick={toggleVisibility}>cancel</button>
+</div>
+```
+- `npm install prop-types` The expected and required props of a component can be defined with the prop-types package.
+- `Togglable.propTypes = { buttonLabel: PropTypes.string.isRequired }` making an element have required props.
+- `npm install --save-dev eslint-plugin-jest` there's a plugin to prevent eslint jest errors.
+- `npm install --save-dev @testing-library/react @testing-library/jest-dom` react testing library used for testing components and it extends jest.
+- `component.debug()` allows printing a component's html to the console.
+- `CI=true npm test -- --coverage` code coverage can be viewed
+- `npm install --save-dev cypress` cypress is used for end to end testing
+- `npm install eslint-plugin-cypress --save-dev` cypress requires a plugin (and configuration) for eslint not to complain about globals.
