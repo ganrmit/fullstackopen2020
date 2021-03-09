@@ -175,3 +175,14 @@ for (let note of helper.initialNotes) {
 - `CI=true npm test -- --coverage` code coverage can be viewed
 - `npm install --save-dev cypress` cypress is used for end to end testing
 - `npm install eslint-plugin-cypress --save-dev` cypress requires a plugin (and configuration) for eslint not to complain about globals.
+
+## 6. State management with Redux
+- `npm install redux` use redux for state control
+- `{ type: 'INCREMENT' }` actions in redux are just objects with a type field (and possibly more).
+- Reducers transform current state to a new state using an action.
+- `counterReducer = (state = 0, action) => {...` put defaults on reducers so they can work when the state is empty
+- `npm install --save-dev deep-freeze` deep-freeze ensures reducers are pure functions and don't produce side effects. Only used in dev as it hurts performance.
+- `[first, second, ...rest] = numbers` array destructuring used.
+- `npm install react-redux` react-redux used for hooking store into react hooks
+- [Redux DevTools](https://chrome.google.com/webstore/detail/redux-devtools/lmhkpmbekcpmknklioeibfkpmmfibljd) and [redux-devtools-extension](https://www.npmjs.com/package/redux-devtools-extension) allow you to inspect the store state.
+- `npm install redux-thunk` async redux action middleware
