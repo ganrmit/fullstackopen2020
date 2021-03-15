@@ -2,7 +2,7 @@
 
 - **[Part 3 Phonebook](https://salty-forest-19169.herokuapp.com/) on Heroku**
 
-My solutions to the [Full Stack Open](https://fullstackopen.com/en/) course at the University of Helsinki. Accompanied by notes for things I found surprising or useful to remember. This is not always the cleanest code and was made for my own learning.
+My solutions to the [Full Stack Open](https://fullstackopen.com/en/) course at the University of Helsinki. Accompanied by notes for things I found surprising or useful to remember. This is not always the cleanest code and was made for my own learning. **Projects are labelled after the chapter they were started (not when finished)**
 
 ## 1. Introduction to React
 - [NVM](https://github.com/nvm-sh/nvm) Node version Manager, useful for getting specific versions of node and npm.
@@ -186,3 +186,56 @@ for (let note of helper.initialNotes) {
 - `npm install react-redux` react-redux used for hooking store into react hooks
 - [Redux DevTools](https://chrome.google.com/webstore/detail/redux-devtools/lmhkpmbekcpmknklioeibfkpmmfibljd) and [redux-devtools-extension](https://www.npmjs.com/package/redux-devtools-extension) allow you to inspect the store state.
 - `npm install redux-thunk` async redux action middleware
+
+## 7. React router, custom hooks, styling app with CSS and webpack
+- `npm install react-router-dom` react router used for routing that just works with HTML5 history API.
+- `BrowserRouter as Router` you can rename on import.
+- The name of custom hooks must start with the word `use` eg. `useState()`.
+- `<input {...name} /> ` spreading attributes can be used in jsx.
+- [Awesome React Hooks Resources](https://github.com/rehooks/awesome-react-hooks)
+- `npm install react-bootstrap` bootstrap styling in react
+- `npm install @material-ui/core` material-ui styling in react
+- `npm install styled-components` shorthand component styling with template literals
+- `npm install --save-dev webpack webpack-cli` webpack tools
+- Webpack works by tracing from the entrypoint.js to any javascript it imports and in turn any javascript they import. This must mean dynamic `requires('/path/'+variable)` won't work?
+- Base webpack config
+``` javascript
+const path = require('path')
+
+const config = {
+  entry: './src/index.js',
+  output: {
+    path: path.resolve(__dirname, 'build'),
+    filename: 'main.js'
+  }
+}
+module.exports = config
+```
+- Loaders give Webpack the ability to handle more than just plain javascript.
+- Babel-loader with react
+```javascript
+const config = {
+  entry: './src/index.js',
+  output: {
+    path: path.resolve(__dirname, 'build'),
+    filename: 'main.js',
+  },
+  module: {
+    rules: [
+      {
+        test: /\.js$/,
+        loader: 'babel-loader',
+        options: {
+          presets: ['@babel/preset-react'],
+        },
+      },
+    ],
+  },
+}
+```
+- `npm install @babel/core babel-loader @babel/preset-react --save-dev` babel-loader dependencies
+- `npm install @babel/polyfill` polyfill for things like async on old browsers
+- `const config = (env, argv) => {...}` webpack config can be a function to have different environments.
+- `npm outdated --depth 0` check for outdated modules
+- `npm audit` check for actual security vulnerabilities and `npm audit fix` to fix patch them
+- [React Patterns](https://reactpatterns.com/) Provides a concise list of react best practice patterns.
