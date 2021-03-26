@@ -4,6 +4,8 @@
 
 My solutions to the [Full Stack Open](https://fullstackopen.com/en/) course at the University of Helsinki. Accompanied by notes for things I found surprising or useful to remember. This is not always the cleanest code and was made for my own learning. **Projects are labelled after the chapter they were started (not when finished)**
 
+I transitioned to Full Stack 2021 in exercise 8a. So far I cannot see any differences between 2020 and 2021 but this repo may not be ideal to learn from.
+
 ## 1. Introduction to React
 - [NVM](https://github.com/nvm-sh/nvm) Node version Manager, useful for getting specific versions of node and npm.
 - `npx create-react-app part1` create an app
